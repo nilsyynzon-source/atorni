@@ -14,10 +14,9 @@ import {
   setMilliseconds,
   parseISO,
   isBefore,
-  startOfDay,
 } from 'date-fns'
 import { ArrowLeft, Plus, Trash2, Calendar, Clock } from 'lucide-react'
-import { cn, formatDateTime } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import toast from 'react-hot-toast'
 
 const TIME_SLOTS = Array.from({ length: 16 }, (_, i) => {

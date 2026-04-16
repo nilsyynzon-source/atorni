@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { AdvicePost } from '@/types'
 import { ADVICE_CATEGORIES } from '@/types'
-import { formatDate, timeAgo } from '@/lib/utils'
+import { timeAgo } from '@/lib/utils'
 import { MessageSquare, CheckCircle, Eye, Plus, Search } from 'lucide-react'
 
 interface SearchParams {
