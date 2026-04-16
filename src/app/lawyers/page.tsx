@@ -37,7 +37,6 @@ export default async function LawyersPage({
 
   const { data: lawyers } = await query.order('created_at', { ascending: false })
 
-  // Filter by name/bio search client-side (or via full-text search)
   const filtered = searchParams.q
     ? (lawyers || []).filter((l) => {
         const name = l.profile?.full_name?.toLowerCase() || ''
@@ -48,23 +47,23 @@ export default async function LawyersPage({
     : (lawyers || [])
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-zinc-50 min-h-screen">
       {/* Page Header */}
-      <div className="bg-white border-b border-gray-100">
+      <div className="bg-white border-b border-zinc-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Find a Lawyer</h1>
-          <p className="text-gray-500">Browse verified attorneys across all practice areas</p>
+          <h1 className="text-3xl font-semibold tracking-tight text-zinc-950 mb-1">Find a Lawyer</h1>
+          <p className="text-zinc-500 text-sm">Browse verified attorneys across all practice areas</p>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Filters Sidebar */}
-          <aside className="lg:w-64 flex-shrink-0">
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sticky top-20">
+          <aside className="lg:w-60 flex-shrink-0">
+            <div className="bg-white rounded-xl border border-zinc-200 p-5 sticky top-20">
               <div className="flex items-center gap-2 mb-5">
-                <SlidersHorizontal className="w-4 h-4 text-gray-500" />
-                <h2 className="font-semibold text-gray-900">Filters</h2>
+                <SlidersHorizontal className="w-4 h-4 text-zinc-400" />
+                <h2 className="font-medium text-zinc-950 text-sm">Filters</h2>
               </div>
 
               <form method="GET">
@@ -72,7 +71,7 @@ export default async function LawyersPage({
                 <div className="mb-5">
                   <label className="label">Search</label>
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
                     <input
                       name="q"
                       type="text"
@@ -135,7 +134,7 @@ export default async function LawyersPage({
                 {(searchParams.q || searchParams.specialization || searchParams.location || searchParams.maxRate) && (
                   <a
                     href="/lawyers"
-                    className="block text-center mt-3 text-sm text-gray-500 hover:text-gray-700"
+                    className="block text-center mt-3 text-sm text-zinc-400 hover:text-zinc-700"
                   >
                     Clear filters
                   </a>
@@ -147,8 +146,8 @@ export default async function LawyersPage({
           {/* Results */}
           <div className="flex-1">
             <div className="flex items-center justify-between mb-5">
-              <p className="text-gray-600 text-sm">
-                <span className="font-semibold text-gray-900">{filtered.length}</span>{' '}
+              <p className="text-zinc-500 text-sm">
+                <span className="font-semibold text-zinc-950">{filtered.length}</span>{' '}
                 {filtered.length === 1 ? 'lawyer' : 'lawyers'} found
                 {searchParams.specialization && (
                   <span> in <strong>{searchParams.specialization}</strong></span>
@@ -157,12 +156,12 @@ export default async function LawyersPage({
             </div>
 
             {filtered.length === 0 ? (
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-16 text-center">
-                <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
-                  <Search className="w-7 h-7 text-gray-400" />
+              <div className="bg-white rounded-xl border border-zinc-200 p-16 text-center">
+                <div className="w-14 h-14 rounded-full bg-zinc-100 flex items-center justify-center mx-auto mb-4">
+                  <Search className="w-6 h-6 text-zinc-400" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">No lawyers found</h3>
-                <p className="text-gray-500 text-sm mb-6">
+                <h3 className="text-base font-semibold text-zinc-950 mb-2">No lawyers found</h3>
+                <p className="text-zinc-500 text-sm mb-6">
                   Try adjusting your filters or search terms.
                 </p>
                 <a href="/lawyers" className="btn-primary text-sm py-2.5 px-6">
@@ -170,7 +169,7 @@ export default async function LawyersPage({
                 </a>
               </div>
             ) : (
-              <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
+              <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
                 {(filtered as LawyerProfile[]).map((lawyer) => (
                   <LawyerCard key={lawyer.id} lawyer={lawyer} />
                 ))}

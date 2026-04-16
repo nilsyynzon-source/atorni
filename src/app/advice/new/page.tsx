@@ -51,12 +51,12 @@ export default function NewAdvicePostPage() {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <div className="bg-white border-b border-gray-100">
+    <div className="bg-zinc-50 min-h-screen">
+      <div className="bg-white border-b border-zinc-100">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link
             href="/advice"
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-blue-700 transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-950 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Q&A
@@ -65,9 +65,9 @@ export default function NewAdvicePostPage() {
       </div>
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Ask a Legal Question</h1>
-          <p className="text-gray-500 text-sm mb-8">
+        <div className="bg-white rounded-xl border border-zinc-200 p-8">
+          <h1 className="text-2xl font-semibold tracking-tight text-zinc-950 mb-2">Ask a Legal Question</h1>
+          <p className="text-zinc-500 text-sm mb-8">
             Be specific and include relevant details. Our lawyers typically respond within 24 hours.
           </p>
 
@@ -101,7 +101,7 @@ export default function NewAdvicePostPage() {
                 required
                 maxLength={200}
               />
-              <p className="text-xs text-gray-400 mt-1">{title.length}/200</p>
+              <p className="text-xs text-zinc-400 mt-1">{title.length}/200</p>
             </div>
 
             <div>
@@ -118,13 +118,13 @@ export default function NewAdvicePostPage() {
                 minLength={50}
                 maxLength={5000}
               />
-              <p className="text-xs text-gray-400 mt-1">{content.length}/5000 (minimum 50)</p>
+              <p className="text-xs text-zinc-400 mt-1">{content.length}/5000 (minimum 50)</p>
             </div>
 
-            <div className="bg-amber-50 border border-amber-100 rounded-xl p-4">
-              <p className="text-xs text-amber-700 leading-relaxed">
-                <strong>Important:</strong> Responses on this platform are general legal information, not legal advice, and do not create an attorney-client relationship. For specific legal advice tailored to your situation, please{' '}
-                <Link href="/lawyers" className="underline">book a consultation</Link> with a lawyer.
+            <div className="bg-zinc-50 border border-zinc-200 rounded-xl p-4">
+              <p className="text-xs text-zinc-500 leading-relaxed">
+                <strong className="text-zinc-700">Important:</strong> Responses on this platform are general legal information, not legal advice, and do not create an attorney-client relationship. For specific legal advice tailored to your situation, please{' '}
+                <Link href="/lawyers" className="underline text-zinc-950">book a consultation</Link> with a lawyer.
               </p>
             </div>
 

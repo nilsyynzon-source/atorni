@@ -125,19 +125,19 @@ export default function LawyerSetupPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-blue-900 border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen bg-zinc-50 flex items-center justify-center">
+        <div className="w-6 h-6 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <div className="bg-white border-b border-gray-100">
+    <div className="bg-zinc-50 min-h-screen">
+      <div className="bg-white border-b border-zinc-100">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link
             href="/lawyer/dashboard"
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-blue-700 transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-950 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to dashboard
@@ -147,18 +147,18 @@ export default function LawyerSetupPage() {
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-2xl font-semibold tracking-tight text-zinc-950">
             {profileId ? 'Edit Your Profile' : 'Set Up Your Lawyer Profile'}
           </h1>
-          <p className="text-gray-500 mt-1 text-sm">
+          <p className="text-zinc-500 mt-1 text-sm">
             Complete your profile to appear in client searches and start accepting bookings.
           </p>
         </div>
 
-        <form onSubmit={handleSave} className="space-y-8">
+        <form onSubmit={handleSave} className="space-y-6">
           {/* Basic Info */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
-            <h2 className="text-lg font-semibold text-gray-900 mb-6">Basic Information</h2>
+          <div className="bg-white rounded-xl border border-zinc-200 p-8">
+            <h2 className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-6">Basic Information</h2>
             <div className="space-y-5">
               <div>
                 <label className="label">Professional Bio</label>
@@ -170,7 +170,7 @@ export default function LawyerSetupPage() {
                   placeholder="Tell clients about your background, experience, and approach. This is your main pitch."
                   maxLength={2000}
                 />
-                <p className="text-xs text-gray-400 mt-1 text-right">{bio.length}/2000</p>
+                <p className="text-xs text-zinc-400 mt-1 text-right">{bio.length}/2000</p>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-5">
@@ -273,18 +273,18 @@ export default function LawyerSetupPage() {
                   type="button"
                   onClick={() => setIsAcceptingClients(!isAcceptingClients)}
                   className={cn(
-                    'w-12 h-6 rounded-full transition-colors relative',
-                    isAcceptingClients ? 'bg-blue-600' : 'bg-gray-200'
+                    'w-11 h-6 rounded-full transition-colors relative',
+                    isAcceptingClients ? 'bg-zinc-950' : 'bg-zinc-200'
                   )}
                 >
                   <span
                     className={cn(
                       'absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform',
-                      isAcceptingClients ? 'translate-x-6' : 'translate-x-0.5'
+                      isAcceptingClients ? 'translate-x-5' : 'translate-x-0.5'
                     )}
                   />
                 </button>
-                <label className="text-sm font-medium text-gray-700">
+                <label className="text-sm text-zinc-700">
                   Currently accepting new clients
                 </label>
               </div>
@@ -292,9 +292,9 @@ export default function LawyerSetupPage() {
           </div>
 
           {/* Specializations */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
-            <h2 className="text-lg font-semibold text-gray-900 mb-2">Practice Areas</h2>
-            <p className="text-sm text-gray-500 mb-5">
+          <div className="bg-white rounded-xl border border-zinc-200 p-8">
+            <h2 className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-2">Practice Areas</h2>
+            <p className="text-sm text-zinc-500 mb-5">
               Select all areas you practice. This helps clients find you.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -306,10 +306,10 @@ export default function LawyerSetupPage() {
                     type="button"
                     onClick={() => toggleSpecialization(spec)}
                     className={cn(
-                      'flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border-2 transition-all text-left',
+                      'flex items-center gap-2 px-3 py-2.5 rounded-lg text-xs font-medium border-2 transition-all text-left',
                       selected
-                        ? 'border-blue-700 bg-blue-50 text-blue-900'
-                        : 'border-gray-200 text-gray-600 hover:border-gray-300'
+                        ? 'border-zinc-950 bg-zinc-950 text-white'
+                        : 'border-zinc-200 text-zinc-600 hover:border-zinc-400'
                     )}
                   >
                     {selected && <Check className="w-3.5 h-3.5 flex-shrink-0" />}

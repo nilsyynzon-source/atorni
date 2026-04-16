@@ -49,8 +49,8 @@ export default function AnswerForm({ postId }: AnswerFormProps) {
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
-      <h2 className="text-lg font-semibold text-gray-900 mb-5">Your Answer</h2>
+    <div className="bg-white rounded-xl border border-zinc-200 p-8">
+      <h2 className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">Your Answer</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <textarea
           value={content}
@@ -63,7 +63,7 @@ export default function AnswerForm({ postId }: AnswerFormProps) {
           maxLength={5000}
         />
         <div className="flex items-center justify-between">
-          <p className="text-xs text-gray-400">{content.length}/5000</p>
+          <p className="text-xs text-zinc-400">{content.length}/5000</p>
           <button
             type="submit"
             disabled={loading || content.trim().length < 20}

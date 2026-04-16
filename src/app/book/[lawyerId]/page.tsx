@@ -106,8 +106,8 @@ export default function BookPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-blue-900 border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen bg-zinc-50 flex items-center justify-center">
+        <div className="w-6 h-6 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
@@ -118,12 +118,12 @@ export default function BookPage() {
   const initials = getInitials(name)
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <div className="bg-white border-b border-gray-100">
+    <div className="bg-zinc-50 min-h-screen">
+      <div className="bg-white border-b border-zinc-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link
             href={`/lawyers/${lawyerId}`}
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-blue-700 transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-950 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to profile
@@ -133,19 +133,19 @@ export default function BookPage() {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Header */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-8">
+        <div className="bg-white rounded-xl border border-zinc-200 p-6 mb-6">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center text-blue-900 font-bold text-lg flex-shrink-0">
+            <div className="w-12 h-12 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-700 font-semibold text-sm flex-shrink-0 border border-zinc-200">
               {lawyer.profile?.avatar_url ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={lawyer.profile.avatar_url} alt={name} className="w-14 h-14 rounded-xl object-cover" />
+                <img src={lawyer.profile.avatar_url} alt={name} className="w-12 h-12 rounded-lg object-cover" />
               ) : (
                 initials
               )}
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">Book a session with {name}</h1>
-              <p className="text-gray-500 text-sm mt-0.5">
+              <h1 className="text-lg font-semibold tracking-tight text-zinc-950">Book a session with {name}</h1>
+              <p className="text-zinc-400 text-sm mt-0.5">
                 {lawyer.hourly_rate
                   ? `${formatCurrency(lawyer.hourly_rate)} per 1-hour consultation`
                   : '1-hour consultation'}
@@ -155,15 +155,15 @@ export default function BookPage() {
 
           {/* Steps indicator */}
           <div className="flex items-center gap-4 mt-6">
-            <div className={`flex items-center gap-2 text-sm font-medium ${step === 'calendar' ? 'text-blue-900' : 'text-green-600'}`}>
-              <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${step === 'calendar' ? 'bg-blue-900 text-white' : 'bg-green-100 text-green-700'}`}>
-                {step === 'confirm' ? <CheckCircle className="w-4 h-4" /> : '1'}
+            <div className={`flex items-center gap-2 text-xs font-medium uppercase tracking-widest ${step === 'calendar' ? 'text-zinc-950' : 'text-zinc-400'}`}>
+              <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${step === 'calendar' ? 'bg-zinc-950 text-white' : 'bg-zinc-100 text-zinc-400'}`}>
+                {step === 'confirm' ? <CheckCircle className="w-3.5 h-3.5" /> : '1'}
               </div>
               Choose time
             </div>
-            <div className="flex-1 h-px bg-gray-200" />
-            <div className={`flex items-center gap-2 text-sm font-medium ${step === 'confirm' ? 'text-blue-900' : 'text-gray-400'}`}>
-              <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${step === 'confirm' ? 'bg-blue-900 text-white' : 'bg-gray-100 text-gray-400'}`}>
+            <div className="flex-1 h-px bg-zinc-100" />
+            <div className={`flex items-center gap-2 text-xs font-medium uppercase tracking-widest ${step === 'confirm' ? 'text-zinc-950' : 'text-zinc-400'}`}>
+              <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${step === 'confirm' ? 'bg-zinc-950 text-white' : 'bg-zinc-100 text-zinc-400'}`}>
                 2
               </div>
               Confirm & pay
@@ -172,13 +172,13 @@ export default function BookPage() {
         </div>
 
         {step === 'calendar' && (
-          <div className="space-y-6">
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-6">Select a date and time</h2>
+          <div className="space-y-5">
+            <div className="bg-white rounded-xl border border-zinc-200 p-6">
+              <h2 className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-6">Select a date and time</h2>
               {slots.length === 0 ? (
                 <div className="text-center py-12">
-                  <p className="text-gray-500">No available slots for this lawyer at the moment.</p>
-                  <Link href="/lawyers" className="mt-4 inline-block text-blue-700 font-medium text-sm hover:underline">
+                  <p className="text-zinc-500 text-sm">No available slots for this lawyer at the moment.</p>
+                  <Link href="/lawyers" className="mt-4 inline-block text-zinc-950 font-medium text-sm hover:underline">
                     Browse other lawyers
                   </Link>
                 </div>
@@ -205,32 +205,32 @@ export default function BookPage() {
         )}
 
         {step === 'confirm' && selectedSlot && (
-          <div className="space-y-6">
+          <div className="space-y-5">
             {/* Session summary */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-5">Confirm your booking</h2>
-              <div className="bg-blue-50 rounded-xl p-5 mb-5">
-                <div className="flex items-center gap-3 mb-3">
-                  <CheckCircle className="w-5 h-5 text-blue-700" />
-                  <span className="font-semibold text-blue-900">Session Details</span>
+            <div className="bg-white rounded-xl border border-zinc-200 p-6">
+              <h2 className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">Confirm your booking</h2>
+              <div className="bg-zinc-50 border border-zinc-100 rounded-xl p-5 mb-5">
+                <div className="flex items-center gap-3 mb-4">
+                  <CheckCircle className="w-4 h-4 text-zinc-950" />
+                  <span className="font-medium text-zinc-950 text-sm">Session Details</span>
                 </div>
                 <dl className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <dt className="text-gray-600">Lawyer</dt>
-                    <dd className="font-medium text-gray-900">{name}</dd>
+                    <dt className="text-zinc-500">Lawyer</dt>
+                    <dd className="font-medium text-zinc-900">{name}</dd>
                   </div>
                   <div className="flex justify-between">
-                    <dt className="text-gray-600">Date & Time</dt>
-                    <dd className="font-medium text-gray-900">{formatDateTime(selectedSlot.start_time)}</dd>
+                    <dt className="text-zinc-500">Date & Time</dt>
+                    <dd className="font-medium text-zinc-900">{formatDateTime(selectedSlot.start_time)}</dd>
                   </div>
                   <div className="flex justify-between">
-                    <dt className="text-gray-600">Duration</dt>
-                    <dd className="font-medium text-gray-900">1 hour</dd>
+                    <dt className="text-zinc-500">Duration</dt>
+                    <dd className="font-medium text-zinc-900">1 hour</dd>
                   </div>
                   {lawyer.hourly_rate && (
-                    <div className="flex justify-between border-t border-blue-100 pt-2 mt-2">
-                      <dt className="font-semibold text-gray-900">Total</dt>
-                      <dd className="font-bold text-blue-900 text-base">{formatCurrency(lawyer.hourly_rate)}</dd>
+                    <div className="flex justify-between border-t border-zinc-200 pt-2 mt-2">
+                      <dt className="font-semibold text-zinc-950">Total</dt>
+                      <dd className="font-semibold text-zinc-950 text-base">{formatCurrency(lawyer.hourly_rate)}</dd>
                     </div>
                   )}
                 </dl>
@@ -250,14 +250,14 @@ export default function BookPage() {
                   placeholder="Describe your legal situation briefly so the lawyer can prepare for your session..."
                   maxLength={1000}
                 />
-                <p className="text-xs text-gray-400 mt-1 text-right">{notes.length}/1000</p>
+                <p className="text-xs text-zinc-400 mt-1 text-right">{notes.length}/1000</p>
               </div>
             </div>
 
             <div className="flex justify-between items-center">
               <button
                 onClick={() => setStep('calendar')}
-                className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1"
+                className="text-sm text-zinc-500 hover:text-zinc-950 flex items-center gap-1"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Change time
@@ -272,7 +272,7 @@ export default function BookPage() {
               </button>
             </div>
 
-            <p className="text-xs text-gray-400 text-center">
+            <p className="text-xs text-zinc-400 text-center">
               You will be redirected to Stripe for secure payment processing. Your payment info is never stored on Atorni.
             </p>
           </div>

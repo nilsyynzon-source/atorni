@@ -63,13 +63,13 @@ function RegisterForm() {
           className={cn(
             'flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all',
             role === 'client'
-              ? 'border-blue-700 bg-blue-50 text-blue-900'
-              : 'border-gray-200 text-gray-600 hover:border-gray-300'
+              ? 'border-zinc-950 bg-zinc-950 text-white'
+              : 'border-zinc-200 text-zinc-600 hover:border-zinc-400'
           )}
         >
           <UserCheck className="w-6 h-6" />
           <span className="text-sm font-semibold">I need a lawyer</span>
-          <span className="text-xs text-gray-500">Find &amp; book consultations</span>
+          <span className={cn('text-xs', role === 'client' ? 'text-zinc-300' : 'text-zinc-400')}>Find &amp; book consultations</span>
         </button>
         <button
           type="button"
@@ -77,13 +77,13 @@ function RegisterForm() {
           className={cn(
             'flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all',
             role === 'lawyer'
-              ? 'border-blue-700 bg-blue-50 text-blue-900'
-              : 'border-gray-200 text-gray-600 hover:border-gray-300'
+              ? 'border-zinc-950 bg-zinc-950 text-white'
+              : 'border-zinc-200 text-zinc-600 hover:border-zinc-400'
           )}
         >
           <Briefcase className="w-6 h-6" />
           <span className="text-sm font-semibold">I&apos;m a lawyer</span>
-          <span className="text-xs text-gray-500">Offer legal services</span>
+          <span className={cn('text-xs', role === 'lawyer' ? 'text-zinc-300' : 'text-zinc-400')}>Offer legal services</span>
         </button>
       </div>
 
@@ -133,7 +133,7 @@ function RegisterForm() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600"
             >
               {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
             </button>
@@ -153,7 +153,7 @@ function RegisterForm() {
         </button>
       </form>
 
-      <p className="mt-4 text-xs text-gray-400 text-center">
+      <p className="mt-4 text-xs text-zinc-400 text-center">
         By creating an account you agree to our{' '}
         <Link href="#" className="underline">Terms of Service</Link> and{' '}
         <Link href="#" className="underline">Privacy Policy</Link>.
@@ -164,27 +164,25 @@ function RegisterForm() {
 
 export default function RegisterPage() {
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-gray-50 flex items-center justify-center py-12 px-4">
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 w-full max-w-md">
+    <div className="min-h-[calc(100vh-4rem)] bg-zinc-50 flex items-center justify-center py-12 px-4">
+      <div className="bg-white rounded-xl border border-zinc-200 p-8 w-full max-w-md">
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2">
-            <div className="w-10 h-10 bg-blue-900 rounded-xl flex items-center justify-center">
-              <Scale className="w-5 h-5 text-amber-400" />
-            </div>
-            <span className="text-2xl font-bold text-blue-900">Atorni</span>
+          <Link href="/" className="inline-flex items-center gap-2.5">
+            <Scale className="w-5 h-5 text-zinc-950" />
+            <span className="text-xl font-semibold tracking-tight text-zinc-950">Atorni</span>
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900 mt-6">Create your account</h1>
-          <p className="text-gray-500 text-sm mt-1">Join thousands of people using Atorni</p>
+          <h1 className="text-2xl font-semibold text-zinc-950 mt-6 tracking-tight">Create your account</h1>
+          <p className="text-zinc-500 text-sm mt-1">Join thousands of people using Atorni</p>
         </div>
 
-        <Suspense fallback={<div className="h-64 animate-pulse bg-gray-50 rounded-xl" />}>
+        <Suspense fallback={<div className="h-64 animate-pulse bg-zinc-50 rounded-xl" />}>
           <RegisterForm />
         </Suspense>
 
         <div className="mt-6 text-center">
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-zinc-500">
             Already have an account?{' '}
-            <Link href="/auth/login" className="text-blue-700 font-medium hover:underline">
+            <Link href="/auth/login" className="text-zinc-950 font-medium hover:underline">
               Sign in
             </Link>
           </p>

@@ -13,8 +13,6 @@ export default async function AdvicePostPage({
 }) {
   const supabase = createClient()
 
-  // Note: view count increment handled server-side via DB trigger or future RPC
-
   const { data: post } = await supabase
     .from('advice_posts')
     .select('*, author:profiles(*)')
@@ -38,12 +36,12 @@ export default async function AdvicePostPage({
   const isAuthor = user?.id === post.author_id
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <div className="bg-white border-b border-gray-100">
+    <div className="bg-zinc-50 min-h-screen">
+      <div className="bg-white border-b border-zinc-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link
             href="/advice"
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-blue-700 transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-950 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Q&A
@@ -51,37 +49,37 @@ export default async function AdvicePostPage({
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-5">
         {/* Question */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
+        <div className="bg-white rounded-xl border border-zinc-200 p-8">
           <div className="flex items-center gap-2 flex-wrap mb-4">
             {post.category && (
-              <span className="text-sm bg-blue-50 text-blue-700 px-3 py-1 rounded-full font-medium">
+              <span className="text-xs bg-zinc-100 text-zinc-600 px-2.5 py-1 rounded-md font-medium">
                 {post.category}
               </span>
             )}
             {post.is_answered && (
-              <span className="flex items-center gap-1 text-sm bg-green-50 text-green-700 px-3 py-1 rounded-full font-medium">
+              <span className="flex items-center gap-1 text-xs bg-zinc-950 text-white px-2.5 py-1 rounded-md font-medium">
                 <CheckCircle className="w-3.5 h-3.5" />
                 Answered
               </span>
             )}
           </div>
 
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">{post.title}</h1>
-          <p className="text-gray-700 leading-relaxed whitespace-pre-line">{post.content}</p>
+          <h1 className="text-2xl font-semibold tracking-tight text-zinc-950 mb-4">{post.title}</h1>
+          <p className="text-zinc-600 leading-relaxed whitespace-pre-line text-sm">{post.content}</p>
 
-          <div className="flex items-center gap-4 mt-6 pt-6 border-t border-gray-100">
+          <div className="flex items-center gap-4 mt-6 pt-6 border-t border-zinc-100">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-900 font-semibold text-xs">
+              <div className="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-700 font-semibold text-xs">
                 {getInitials(post.author?.full_name)}
               </div>
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-zinc-600">
                 {post.author?.full_name || 'Anonymous'}
               </span>
             </div>
-            <span className="text-sm text-gray-400">{timeAgo(post.created_at)}</span>
-            <span className="text-sm text-gray-400 ml-auto">
+            <span className="text-sm text-zinc-400">{timeAgo(post.created_at)}</span>
+            <span className="text-sm text-zinc-400 ml-auto">
               {formatDateTime(post.created_at)}
             </span>
           </div>
@@ -89,51 +87,50 @@ export default async function AdvicePostPage({
 
         {/* Answers */}
         <div>
-          <div className="flex items-center gap-2 mb-5">
-            <MessageSquare className="w-5 h-5 text-gray-400" />
-            <h2 className="text-lg font-semibold text-gray-900">
+          <div className="flex items-center gap-2 mb-4">
+            <MessageSquare className="w-4 h-4 text-zinc-400" />
+            <h2 className="text-sm font-medium text-zinc-400 uppercase tracking-widest">
               {answers?.length ?? 0} {(answers?.length ?? 0) === 1 ? 'Answer' : 'Answers'}
             </h2>
           </div>
 
           {(!answers || answers.length === 0) && (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-10 text-center">
-              <MessageSquare className="w-10 h-10 text-gray-300 mx-auto mb-3" />
-              <p className="text-gray-500">No answers yet. Be the first to help!</p>
+            <div className="bg-white rounded-xl border border-zinc-200 p-10 text-center">
+              <MessageSquare className="w-10 h-10 text-zinc-200 mx-auto mb-3" />
+              <p className="text-zinc-500 text-sm">No answers yet. Be the first to help!</p>
             </div>
           )}
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             {(answers as AdviceAnswer[] | null)?.map((answer) => {
-              const isLawyer =
-                answer.author?.role === 'lawyer'
+              const isLawyer = answer.author?.role === 'lawyer'
               const authorName = answer.author?.full_name || 'Anonymous'
 
               return (
                 <div
                   key={answer.id}
-                  className={`bg-white rounded-2xl border shadow-sm p-6 ${
-                    answer.is_accepted ? 'border-green-200' : 'border-gray-100'
+                  className={`bg-white rounded-xl border p-6 ${
+                    answer.is_accepted ? 'border-zinc-950' : 'border-zinc-200'
                   }`}
                 >
                   {answer.is_accepted && (
-                    <div className="flex items-center gap-2 text-green-700 text-sm font-semibold mb-4">
+                    <div className="flex items-center gap-2 text-zinc-950 text-xs font-semibold mb-4 uppercase tracking-widest">
                       <CheckCircle className="w-4 h-4" />
                       Accepted Answer
                     </div>
                   )}
 
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-line">{answer.content}</p>
+                  <p className="text-zinc-600 leading-relaxed whitespace-pre-line text-sm">{answer.content}</p>
 
-                  <div className="flex items-center gap-4 mt-5 pt-5 border-t border-gray-50">
+                  <div className="flex items-center gap-4 mt-5 pt-5 border-t border-zinc-100">
                     <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-900 font-semibold text-xs">
+                      <div className="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-700 font-semibold text-xs">
                         {getInitials(authorName)}
                       </div>
                       <div>
-                        <span className="text-sm font-medium text-gray-900">{authorName}</span>
+                        <span className="text-sm font-medium text-zinc-900">{authorName}</span>
                         {isLawyer && (
-                          <span className="ml-2 inline-flex items-center gap-1 text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full font-medium">
+                          <span className="ml-2 inline-flex items-center gap-1 text-xs bg-zinc-100 text-zinc-600 px-2 py-0.5 rounded-md font-medium">
                             <Scale className="w-3 h-3" />
                             Lawyer
                           </span>
@@ -141,11 +138,11 @@ export default async function AdvicePostPage({
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-1 text-sm text-gray-400">
+                    <div className="flex items-center gap-1 text-sm text-zinc-400">
                       <ThumbsUp className="w-3.5 h-3.5" />
                       {answer.upvotes}
                     </div>
-                    <span className="text-sm text-gray-400 ml-auto">{timeAgo(answer.created_at)}</span>
+                    <span className="text-sm text-zinc-400 ml-auto">{timeAgo(answer.created_at)}</span>
                   </div>
                 </div>
               )
@@ -157,9 +154,9 @@ export default async function AdvicePostPage({
         {user ? (
           <AnswerForm postId={post.id} isAuthor={isAuthor} />
         ) : (
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 text-center">
-            <p className="text-gray-600 mb-4">
-              <Link href="/auth/login" className="text-blue-700 font-medium hover:underline">
+          <div className="bg-white rounded-xl border border-zinc-200 p-8 text-center">
+            <p className="text-zinc-600 mb-4 text-sm">
+              <Link href="/auth/login" className="text-zinc-950 font-medium hover:underline">
                 Sign in
               </Link>{' '}
               to answer this question.

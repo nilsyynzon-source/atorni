@@ -149,19 +149,19 @@ export default function LawyerAvailabilityPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-blue-900 border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen bg-zinc-50 flex items-center justify-center">
+        <div className="w-6 h-6 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <div className="bg-white border-b border-gray-100">
+    <div className="bg-zinc-50 min-h-screen">
+      <div className="bg-white border-b border-zinc-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link
             href="/lawyer/dashboard"
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-blue-700 transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-950 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to dashboard
@@ -171,8 +171,8 @@ export default function LawyerAvailabilityPage() {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">Manage Availability</h1>
-          <p className="text-gray-500 mt-1 text-sm">
+          <h1 className="text-2xl font-semibold tracking-tight text-zinc-950">Manage Availability</h1>
+          <p className="text-zinc-500 mt-1 text-sm">
             Add time slots when you are available for client sessions.
           </p>
         </div>
@@ -180,9 +180,9 @@ export default function LawyerAvailabilityPage() {
         <div className="grid lg:grid-cols-5 gap-8">
           {/* Add Slots Panel */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sticky top-20">
-              <h2 className="font-semibold text-gray-900 mb-5 flex items-center gap-2">
-                <Plus className="w-4 h-4" />
+            <div className="bg-white rounded-xl border border-zinc-200 p-6 sticky top-20">
+              <h2 className="font-medium text-zinc-950 text-sm mb-5 flex items-center gap-2">
+                <Plus className="w-4 h-4 text-zinc-400" />
                 Add Time Slots
               </h2>
 
@@ -204,12 +204,11 @@ export default function LawyerAvailabilityPage() {
                 <div>
                   <label className="label">
                     Select Hours{' '}
-                    <span className="text-gray-400 font-normal">(1-hour sessions)</span>
+                    <span className="text-zinc-400 font-normal normal-case">(1-hour sessions)</span>
                   </label>
                   <div className="grid grid-cols-2 gap-2 mt-2">
                     {TIME_SLOTS.map(({ label, hour }) => {
                       const isSelected = selectedHours.includes(hour)
-                      // Check if this slot already exists for selected date
                       const dateParts = selectedDate.split('-').map(Number)
                       const slotDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
                       const slotStart = setHours(setMinutes(slotDate, 0), hour)
@@ -229,17 +228,17 @@ export default function LawyerAvailabilityPage() {
                           disabled={alreadyExists || isPastHour}
                           onClick={() => toggleHour(hour)}
                           className={cn(
-                            'py-2 px-3 rounded-lg text-sm font-medium border transition-all',
+                            'py-2 px-3 rounded-lg text-xs font-medium border transition-all',
                             alreadyExists || isPastHour
-                              ? 'border-gray-100 bg-gray-50 text-gray-300 cursor-not-allowed'
+                              ? 'border-zinc-100 bg-zinc-50 text-zinc-300 cursor-not-allowed'
                               : isSelected
-                              ? 'border-blue-700 bg-blue-50 text-blue-900'
-                              : 'border-gray-200 text-gray-700 hover:border-blue-300'
+                              ? 'border-zinc-950 bg-zinc-950 text-white'
+                              : 'border-zinc-200 text-zinc-700 hover:border-zinc-400'
                           )}
                         >
                           {label}
                           {alreadyExists && (
-                            <span className="block text-xs text-gray-300">added</span>
+                            <span className="block text-xs text-zinc-300">added</span>
                           )}
                         </button>
                       )
@@ -261,22 +260,22 @@ export default function LawyerAvailabilityPage() {
 
           {/* Existing Slots */}
           <div className="lg:col-span-3">
-            <h2 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-gray-500" />
+            <h2 className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+              <Calendar className="w-4 h-4" />
               Upcoming Slots ({slots.length})
             </h2>
 
             {Object.keys(groupedSlots).length === 0 ? (
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-10 text-center">
-                <Clock className="w-10 h-10 text-gray-300 mx-auto mb-3" />
-                <p className="text-gray-500 text-sm">No upcoming slots. Add some using the panel.</p>
+              <div className="bg-white rounded-xl border border-zinc-200 p-10 text-center">
+                <Clock className="w-10 h-10 text-zinc-200 mx-auto mb-3" />
+                <p className="text-zinc-500 text-sm">No upcoming slots. Add some using the panel.</p>
               </div>
             ) : (
-              <div className="space-y-5">
+              <div className="space-y-4">
                 {Object.entries(groupedSlots).map(([date, dateSlots]) => (
-                  <div key={date} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-                    <div className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                      <Calendar className="w-4 h-4 text-blue-600" />
+                  <div key={date} className="bg-white rounded-xl border border-zinc-200 p-5">
+                    <div className="font-medium text-zinc-950 text-sm mb-3 flex items-center gap-2">
+                      <Calendar className="w-4 h-4 text-zinc-400" />
                       {format(parseISO(`${date}T12:00:00`), 'EEEE, MMMM d, yyyy')}
                     </div>
                     <div className="space-y-2">
@@ -284,28 +283,28 @@ export default function LawyerAvailabilityPage() {
                         <div
                           key={slot.id}
                           className={cn(
-                            'flex items-center justify-between px-4 py-3 rounded-xl border',
+                            'flex items-center justify-between px-4 py-3 rounded-lg border',
                             slot.is_booked
-                              ? 'bg-green-50 border-green-100'
-                              : 'bg-gray-50 border-gray-100'
+                              ? 'bg-zinc-950 border-zinc-950'
+                              : 'bg-zinc-50 border-zinc-100'
                           )}
                         >
                           <div className="flex items-center gap-3">
-                            <Clock className="w-4 h-4 text-gray-400" />
-                            <span className="text-sm font-medium text-gray-700">
+                            <Clock className={cn('w-4 h-4', slot.is_booked ? 'text-zinc-400' : 'text-zinc-400')} />
+                            <span className={cn('text-sm font-medium', slot.is_booked ? 'text-white' : 'text-zinc-700')}>
                               {format(parseISO(slot.start_time), 'h:mm a')} –{' '}
                               {format(parseISO(slot.end_time), 'h:mm a')}
                             </span>
                           </div>
                           <div className="flex items-center gap-3">
                             {slot.is_booked ? (
-                              <span className="text-xs bg-green-100 text-green-700 px-2.5 py-1 rounded-full font-medium">
+                              <span className="text-xs text-zinc-300 font-medium">
                                 Booked
                               </span>
                             ) : (
                               <button
                                 onClick={() => handleDeleteSlot(slot.id)}
-                                className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                className="p-1.5 text-zinc-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                                 title="Remove slot"
                               >
                                 <Trash2 className="w-4 h-4" />

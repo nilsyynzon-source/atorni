@@ -67,7 +67,7 @@ function LoginForm() {
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600"
           >
             {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
           </button>
@@ -83,27 +83,25 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-gray-50 flex items-center justify-center py-12 px-4">
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 w-full max-w-md">
+    <div className="min-h-[calc(100vh-4rem)] bg-zinc-50 flex items-center justify-center py-12 px-4">
+      <div className="bg-white rounded-xl border border-zinc-200 p-8 w-full max-w-md">
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2">
-            <div className="w-10 h-10 bg-blue-900 rounded-xl flex items-center justify-center">
-              <Scale className="w-5 h-5 text-amber-400" />
-            </div>
-            <span className="text-2xl font-bold text-blue-900">Atorni</span>
+          <Link href="/" className="inline-flex items-center gap-2.5">
+            <Scale className="w-5 h-5 text-zinc-950" />
+            <span className="text-xl font-semibold tracking-tight text-zinc-950">Atorni</span>
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900 mt-6">Welcome back</h1>
-          <p className="text-gray-500 text-sm mt-1">Sign in to your account</p>
+          <h1 className="text-2xl font-semibold text-zinc-950 mt-6 tracking-tight">Welcome back</h1>
+          <p className="text-zinc-500 text-sm mt-1">Sign in to your account</p>
         </div>
 
-        <Suspense fallback={<div className="h-48 animate-pulse bg-gray-50 rounded-xl" />}>
+        <Suspense fallback={<div className="h-48 animate-pulse bg-zinc-50 rounded-xl" />}>
           <LoginForm />
         </Suspense>
 
         <div className="mt-6 text-center">
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-zinc-500">
             Don&apos;t have an account?{' '}
-            <Link href="/auth/register" className="text-blue-700 font-medium hover:underline">
+            <Link href="/auth/register" className="text-zinc-950 font-medium hover:underline">
               Create one
             </Link>
           </p>
