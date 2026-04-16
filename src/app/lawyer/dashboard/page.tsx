@@ -49,7 +49,7 @@ export default async function LawyerDashboardPage() {
   const [
     { data: upcomingBookings },
     { data: pastBookings },
-    { data: totalSlots },
+    { count: openSlotsCount },
     { data: totalBookings },
   ] = await Promise.all([
     supabase
@@ -81,7 +81,8 @@ export default async function LawyerDashboardPage() {
       .select('id', { count: 'exact', head: true })
       .eq('lawyer_id', lawyerProfile.id)
       .eq('is_booked', false)
-      .gte('start_time', new Date().toISOString()),
+      .gte('start_time', new Date().toISOString())
+      .returns<null>(),
 
     supabase
       .from('bookings')
@@ -105,7 +106,7 @@ export default async function LawyerDashboardPage() {
     {
       icon: Clock,
       label: 'Open Slots',
-      value: (totalSlots as unknown as { count: number } | null)?.count?.toString() ?? '0',
+      value: (openSlotsCount ?? 0).toString(),
       color: 'bg-green-50 text-green-700',
     },
     {

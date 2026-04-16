@@ -13,8 +13,7 @@ export default async function AdvicePostPage({
 }) {
   const supabase = await createClient()
 
-  // Increment view count
-  await supabase.rpc('increment_view_count' as never, { post_id: params.id }).maybeSingle()
+  // Note: view count increment handled server-side via DB trigger or future RPC
 
   const { data: post } = await supabase
     .from('advice_posts')

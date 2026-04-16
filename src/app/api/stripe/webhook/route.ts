@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
 import Stripe from 'stripe'
 import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
 
 // Use the service role key so we can bypass RLS for booking creation
 function createAdminClient() {
