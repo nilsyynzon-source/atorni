@@ -21,7 +21,7 @@ export default async function LawyerProfilePage({
 }: {
   params: { id: string }
 }) {
-  const supabase = await createClient()
+  const supabase = createClient()
 
   const { data: lawyer } = await supabase
     .from('lawyer_profiles')

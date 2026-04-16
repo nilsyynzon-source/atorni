@@ -21,7 +21,7 @@ import {
 } from 'lucide-react'
 
 export default async function LawyerDashboardPage() {
-  const supabase = await createClient()
+  const supabase = createClient()
   const {
     data: { user },
   } = await supabase.auth.getUser()

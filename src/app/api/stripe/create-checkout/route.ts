@@ -4,7 +4,7 @@ import { stripe } from '@/lib/stripe'
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = await createClient()
+    const supabase = createClient()
     const {
       data: { user },
     } = await supabase.auth.getUser()

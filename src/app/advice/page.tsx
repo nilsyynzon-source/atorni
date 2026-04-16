@@ -15,7 +15,7 @@ export default async function AdvicePage({
 }: {
   searchParams: SearchParams
 }) {
-  const supabase = await createClient()
+  const supabase = createClient()
 
   let query = supabase
     .from('advice_posts')

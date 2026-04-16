@@ -16,7 +16,7 @@ export default async function LawyersPage({
 }: {
   searchParams: SearchParams
 }) {
-  const supabase = await createClient()
+  const supabase = createClient()
 
   let query = supabase
     .from('lawyer_profiles')

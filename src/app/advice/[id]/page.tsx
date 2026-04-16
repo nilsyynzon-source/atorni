@@ -11,7 +11,7 @@ export default async function AdvicePostPage({
 }: {
   params: { id: string }
 }) {
-  const supabase = await createClient()
+  const supabase = createClient()
 
   // Note: view count increment handled server-side via DB trigger or future RPC
 

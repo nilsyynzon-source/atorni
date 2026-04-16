@@ -15,7 +15,7 @@ import {
 } from 'lucide-react'
 
 export default async function Home() {
-  const supabase = await createClient()
+  const supabase = createClient()
 
   const { data: featuredLawyers } = await supabase
     .from('lawyer_profiles')
