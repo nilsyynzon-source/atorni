@@ -8,9 +8,27 @@ export async function GET(request: Request) {
 
   if (code) {
     const supabase = createClient()
-    const { error } = await supabase.auth.exchangeCodeForSession(code)
-    if (!error) {
-      return NextResponse.redirect(`${origin}${next}`)
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code)
+
+    if (!error && data.user) {
+      // Determine where to redirect based on user role
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', data.user.id)
+        .single()
+
+      // If 'next' was provided (from emailRedirectTo), use it
+      // Otherwise, redirect based on role
+      if (next !== '/') {
+        return NextResponse.redirect(`${origin}${next}`)
+      }
+
+      if (profile?.role === 'lawyer') {
+        return NextResponse.redirect(`${origin}/lawyer/dashboard`)
+      }
+
+      return NextResponse.redirect(`${origin}/dashboard`)
     }
   }
 

@@ -4,7 +4,7 @@ import { useState, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
-import { Scale, Eye, EyeOff, UserCheck, Briefcase } from 'lucide-react'
+import { Scale, Eye, EyeOff, UserCheck, Briefcase, Mail } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import toast from 'react-hot-toast'
 import type { UserRole } from '@/types'
@@ -19,6 +19,7 @@ function RegisterForm() {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [emailSent, setEmailSent] = useState(false)
   const router = useRouter()
   const supabase = createClient()
 
@@ -30,11 +31,15 @@ function RegisterForm() {
     }
     setLoading(true)
 
-    const { error } = await supabase.auth.signUp({
+    const redirectTo = role === 'lawyer' ? '/lawyer/setup' : '/dashboard'
+    const emailRedirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(redirectTo)}`
+
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: { full_name: fullName, role },
+        emailRedirectTo,
       },
     })
 
@@ -44,13 +49,47 @@ function RegisterForm() {
       return
     }
 
-    toast.success('Account created! Redirecting…')
-    if (role === 'lawyer') {
-      router.push('/lawyer/setup')
-    } else {
-      router.push('/dashboard')
+    // If session is present, email confirmation is disabled — log in immediately
+    if (data.session) {
+      toast.success('Account created!')
+      router.push(redirectTo)
+      router.refresh()
+      return
     }
-    router.refresh()
+
+    // No session means email confirmation is required
+    setEmailSent(true)
+    setLoading(false)
+  }
+
+  // Email confirmation sent state
+  if (emailSent) {
+    return (
+      <div className="text-center py-4">
+        <div className="w-14 h-14 rounded-full bg-zinc-100 flex items-center justify-center mx-auto mb-5">
+          <Mail className="w-7 h-7 text-zinc-600" />
+        </div>
+        <h2 className="text-lg font-semibold text-zinc-950 mb-2">Check your email</h2>
+        <p className="text-zinc-500 text-sm leading-relaxed mb-4">
+          We sent a confirmation link to{' '}
+          <strong className="text-zinc-700">{email}</strong>.
+          Click it to activate your account.
+        </p>
+        <p className="text-xs text-zinc-400 mb-6">
+          Didn&apos;t receive it? Check your spam folder or{' '}
+          <button
+            onClick={() => setEmailSent(false)}
+            className="underline text-zinc-600 hover:text-zinc-950"
+          >
+            try again
+          </button>
+          .
+        </p>
+        <Link href="/auth/login" className="btn-primary block text-center">
+          Go to Sign In
+        </Link>
+      </div>
+    )
   }
 
   return (
@@ -179,7 +218,7 @@ export default function RegisterPage() {
           <RegisterForm />
         </Suspense>
 
-        <div className="mt-6 text-center">
+        <div className="mt-6 text-center border-t border-zinc-100 pt-6">
           <p className="text-sm text-zinc-500">
             Already have an account?{' '}
             <Link href="/auth/login" className="text-zinc-950 font-medium hover:underline">
