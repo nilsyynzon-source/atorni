@@ -81,8 +81,7 @@ export default async function LawyerDashboardPage() {
       .select('id', { count: 'exact', head: true })
       .eq('lawyer_id', lawyerProfile.id)
       .eq('is_booked', false)
-      .gte('start_time', new Date().toISOString())
-      .returns<null>(),
+      .gte('start_time', new Date().toISOString()),
 
     supabase
       .from('bookings')
